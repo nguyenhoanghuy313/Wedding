@@ -1,0 +1,122 @@
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Open+Sans:wght@400;600&display=swap');
+
+body {
+    margin: 0;
+    font-family: 'Open Sans', sans-serif;
+    background-color: #f9f8f6;
+    color: #333;
+    overflow-x: hidden;
+}
+
+/* Hero section */
+.hero {
+    position: relative;
+    height: 100vh;
+    background: linear-gradient(to bottom right, #cce3f0, #f9f6ef);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.hero .content h1 {
+    font-family: 'Great Vibes', cursive;
+    font-size: 3rem;
+    color: #325d79;
+    margin-bottom: 0.5rem;
+}
+
+.hero .content p {
+    font-size: 1.1rem;
+    color: #5a5a5a;
+}
+
+.date {
+    display: block;
+    margin-top: 1rem;
+    font-size: 1.2rem;
+    letter-spacing: 3px;
+    color: #6b8ea5;
+}
+
+section {
+    padding: 60px 20px;
+    text-align: center;
+}
+
+h2 {
+    color: #325d79;
+    font-family: 'Great Vibes', cursive;
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+p {
+    max-width: 600px;
+    margin: 0 auto 15px auto;
+    line-height: 1.6;
+}
+
+/* Info card */
+.info-card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 20px;
+    max-width: 400px;
+    margin: 0 auto;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+/* Gallery */
+.gallery .photos {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.photo {
+    width: 200px;
+    height: 260px;
+    background-color: #eaeaea;
+    background-size: cover;
+    background-position: center;
+    border-radius: 10px;
+}
+
+/* Thanks section */
+.thanks {
+    background-color: #e7eff3;
+    padding: 60px 20px;
+}
+
+/* Footer */
+footer {
+    background-color: #325d79;
+    color: #fff;
+    text-align: center;
+    padding: 10px 0;
+    font-size: 0.9rem;
+}
+
+/* Fade-in animation */
+.fade-in {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 1s ease;
+}
+.fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .hero .content h1 {
+        font-size: 2.5rem;
+    }
+    .photo {
+        width: 140px;
+        height: 180px;
+    }
+}
