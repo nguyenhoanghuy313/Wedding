@@ -1,63 +1,341 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Thiệp cưới Hoàng Hiệp & Kazua</title>
-    <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hoàng Hiệp & Kazua - Wedding Invitation</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<!-- Nhạc nền -->
-<audio id="bg-music" src="music/background" autoplay loop></audio>
+<!-- Music Control Button -->
+<button id="musicToggle" class="music-toggle">
+    <svg class="music-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+        <path d="M9 18V5l12-2v13"></path>
+        <circle cx="6" cy="18" r="3"></circle>
+        <circle cx="18" cy="16" r="3"></circle>
+    </svg>
+</button>
 
-<!-- Mở đầu -->
-<section class="hero fade-in">
-    <div class="overlay"></div>
-    <div class="content">
-        <h1>Hoàng Hiệp &  一愛 (Kazua)</h1>
-        <p>Trân trọng kính mời bạn đến chung vui cùng chúng tôi</p>
-        <span class="date">21 • 11 • 2025</span>
+<!-- Audio Element -->
+<audio id="bgMusic" loop>
+    <source src="music/background.mp3" type="audio/mpeg">
+</audio>
+
+<!-- Floating Hearts Animation -->
+<div class="hearts-container" id="heartsContainer"></div>
+
+<!-- Hero Section -->
+<section class="hero" id="hero">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+        <p class="save-the-date">Save The Date</p>
+        <h1 class="couple-names">
+            <span class="bride-name">Hoàng Hiệp</span>
+            <span class="ampersand">&</span>
+            <span class="groom-name">一愛 (Kazua)</span>
+        </h1>
+        <p class="invitation-text">Trân trọng kính mời bạn đến chung vui cùng chúng tôi</p>
+        <p class="wedding-date">21 • 11 • 2025</p>
+    </div>
+    <div class="scroll-indicator">
+        <div class="mouse"></div>
     </div>
 </section>
 
-<!-- Lời mời -->
-<section class="invitation fade-in">
-    <h2>Lời mời</h2>
-    <p>
-        Chúng tôi hân hoan mời bạn đến chung vui trong ngày trọng đại của
-        <strong>Hoàng Hiệp & Kazua</strong>.
-        Sự hiện diện của bạn là niềm hạnh phúc lớn lao đối với chúng tôi.
-    </p>
-</section>
+<!-- Couple Introduction -->
+<section class="couple-intro" id="couple">
+    <div class="section-decoration">
+        <img src="images/flower-decoration.png" alt="decoration" class="decoration-img">
+    </div>
+    <h2 class="section-title">Giới Thiệu</h2>
+    <p class="section-subtitle">Cô Dâu & Chú Rể</p>
 
-<!-- Thông tin buổi lễ -->
-<section class="details fade-in">
-    <h2>Thông tin buổi lễ</h2>
-    <div class="info-card">
-        <p><strong>Ngày:</strong> 21 tháng 11, 2025</p>
-        <p><strong>Thời gian:</strong> 11:00 sáng</p>
-        <p><strong>Địa điểm:</strong> Trung tâm tiệc cưới Thu Hằng</p>
+    <div class="couple-cards">
+        <div class="couple-card bride-card animate-on-scroll">
+            <div class="card-image">
+                <img src="images/bride.jpg" alt="Cô dâu" class="couple-photo">
+            </div>
+            <h3 class="couple-card-name">Kazua</h3>
+        </div>
+
+        <div class="couple-card groom-card animate-on-scroll">
+            <div class="card-image">
+                <img src="images/groom.jpg" alt="Chú rể" class="couple-photo">
+            </div>
+            <h3 class="couple-card-name">Hoàng Hiệp</h3>
+        </div>
+    </div>
+
+    <div class="heart-divider">
+        <svg viewBox="0 0 200 50" class="hearts-svg">
+            <path d="M30,15 Q30,8 35,8 Q40,8 40,15 Q40,22 30,30 Q20,22 20,15 Q20,8 25,8 Q30,8 30,15" fill="#9d7b6f"/>
+            <path d="M100,15 Q100,8 105,8 Q110,8 110,15 Q110,22 100,30 Q90,22 90,15 Q90,8 95,8 Q100,8 100,15" fill="#9d7b6f"/>
+            <path d="M170,15 Q170,8 175,8 Q180,8 180,15 Q180,22 170,30 Q160,22 160,15 Q160,8 165,8 Q170,8 170,15" fill="#9d7b6f"/>
+            <line x1="40" y1="20" x2="90" y2="20" stroke="#9d7b6f" stroke-width="2"/>
+            <line x1="110" y1="20" x2="160" y2="20" stroke="#9d7b6f" stroke-width="2"/>
+        </svg>
     </div>
 </section>
 
-<!-- Ảnh cưới -->
-<section class="gallery fade-in">
-    <h2>Khoảnh khắc của chúng tôi</h2>
-    <div class="photos">
-        <div class="photo" style="background-image: url('images/photo1.jpg')"></div>
-        <div class="photo" style="background-image: url('images/photo2.jpg')"></div>
-        <div class="photo" style="background-image: url('images/photo3.jpg')"></div>
+<!-- Save The Date / Countdown -->
+<section class="countdown-section" id="countdown">
+    <div class="countdown-header">
+        <p class="countdown-label">CÙNG ĐẾM NGƯỢC THỜI GIAN</p>
+        <h2 class="countdown-title">Save The Date</h2>
+        <div class="heart-icon">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12,21.35L10.55,20.03C5.4,15.36 2,12.27 2,8.5C2,5.41 4.42,3 7.5,3C9.24,3 10.91,3.81 12,5.08C13.09,3.81 14.76,3 16.5,3C19.58,3 22,5.41 22,8.5C22,12.27 18.6,15.36 13.45,20.03L12,21.35Z"/>
+            </svg>
+        </div>
+    </div>
+
+    <div class="countdown-timer" id="countdownTimer">
+        <div class="time-unit">
+            <div class="time-circle">
+                <span id="days" class="time-number">00</span>
+            </div>
+            <p class="time-label">Ngày</p>
+        </div>
+        <div class="time-unit">
+            <div class="time-circle">
+                <span id="hours" class="time-number">00</span>
+            </div>
+            <p class="time-label">Giờ</p>
+        </div>
+        <div class="time-unit">
+            <div class="time-circle">
+                <span id="minutes" class="time-number">00</span>
+            </div>
+            <p class="time-label">Phút</p>
+        </div>
+        <div class="time-unit">
+            <div class="time-circle">
+                <span id="seconds" class="time-number">00</span>
+            </div>
+            <p class="time-label">Giây</p>
+        </div>
+    </div>
+
+    <div class="event-info animate-on-scroll">
+        <h3 class="event-title">Trân trọng kính mời</h3>
+        <p class="event-subtitle">Anh, Chị và người thương</p>
+        <p class="event-text">Tham dự lễ cưới của chúng tôi</p>
+        <p class="event-couple">Hoàng Hiệp & Kazua</p>
+
+        <div class="event-details">
+            <img src="images/couple-main.jpg" alt="Couple" class="event-image">
+
+            <div class="event-info-box">
+                <h4 class="event-type">TIỆC CƯỚI</h4>
+                <p class="event-names">Hoàng Hiệp & Kazua</p>
+                <p class="event-location">Trung tâm tiệc cưới Thu Hằng</p>
+                <p class="event-time">Vào lúc: 11:00 AM</p>
+
+                <div class="event-date-large">
+                    <span class="date-day">Thứ Sáu</span>
+                    <span class="date-number">21</span>
+                    <span class="date-month">11 - 2025</span>
+                </div>
+
+                <div class="event-buttons">
+                    <a href="https://maps.app.goo.gl/2DsfuXZ57MXM6x3T7" target="_blank" class="event-btn map-btn">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12,2C8.13,2 5,5.13 5,9c0,5.25 7,13 7,13s7-7.75 7-13C19,5.13 15.87,2 12,2z M12,11.5c-1.38,0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5,1.12 2.5,2.5-1.12,2.5-2.5,2.5z"/>
+                        </svg>
+                    </a>
+                    <a href="#rsvp" class="event-btn calendar-btn">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M19,4H18V2H16V4H8V2H6V4H5C3.89,4 3,4.9 3,6V20A2,2 0 0,0 5,22H19A2,2 0 0,0 21,20V6A2,2 0 0,0 19,4M19,20H5V10H19V20Z"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
     </div>
 </section>
 
-<!-- Cảm ơn -->
-<section class="thanks fade-in">
-    <h2>Cảm ơn</h2>
-    <p>Cảm ơn vì đã cùng chia sẻ niềm vui của chúng tôi 💕</p>
+<!-- Love Story -->
+<section class="love-story" id="story">
+    <h2 class="section-title">LOVE STORY</h2>
+
+    <div class="story-timeline">
+        <div class="story-item left animate-on-scroll">
+            <div class="story-image">
+                <img src="images/story1.jpg" alt="Story 1">
+            </div>
+            <div class="story-content">
+                <p class="story-text">Có một lần mình đi chơi công viên, gặp nhau...</p>
+            </div>
+        </div>
+
+        <div class="story-item right animate-on-scroll">
+            <div class="story-content">
+                <p class="story-text">Thời gian trôi, 2 năm trôi qua chúng mình ngày càng hiểu nhau...</p>
+            </div>
+            <div class="story-image">
+                <img src="images/story2.jpg" alt="Story 2">
+            </div>
+        </div>
+
+        <div class="story-item left animate-on-scroll">
+            <div class="story-image">
+                <img src="images/story3.jpg" alt="Story 3">
+            </div>
+            <div class="story-content">
+                <p class="story-text">Sau một đêm gần sáng, chúng mình đều có cảm nhận và quyết định...</p>
+            </div>
+        </div>
+    </div>
 </section>
 
-<footer>
-    <p>Hoàng Hiệp & Kazua © 2025</p>
+<!-- Photo Gallery -->
+<section class="gallery" id="gallery">
+    <h2 class="section-title">ALBUM ẢNH</h2>
+
+    <div class="gallery-container">
+        <button class="gallery-nav prev" id="prevBtn">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M15.41,16.58L10.83,12L15.41,7.41L14,6L8,12L14,18L15.41,16.58Z"/>
+            </svg>
+        </button>
+
+        <div class="gallery-wrapper">
+            <div class="gallery-track" id="galleryTrack">
+                <div class="gallery-slide"><img src="images/gallery1.jpg" alt="Gallery 1"></div>
+                <div class="gallery-slide"><img src="images/gallery2.jpg" alt="Gallery 2"></div>
+                <div class="gallery-slide"><img src="images/gallery3.jpg" alt="Gallery 3"></div>
+                <div class="gallery-slide"><img src="images/gallery4.jpg" alt="Gallery 4"></div>
+                <div class="gallery-slide"><img src="images/gallery5.jpg" alt="Gallery 5"></div>
+                <!-- Thêm ảnh từ 6-20 tại đây -->
+            </div>
+        </div>
+
+        <button class="gallery-nav next" id="nextBtn">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z"/>
+            </svg>
+        </button>
+    </div>
+</section>
+
+<!-- Guest Book -->
+<section class="guestbook" id="guestbook">
+    <h2 class="section-title">Gửi Lời Chúc Mừng</h2>
+    <p class="section-subtitle">Cảm ơn bạn rất nhiều vì đã gửi những lời chúc mừng tốt đẹp nhất đến đám cưới của chúng tôi!</p>
+
+    <form class="guestbook-form" id="guestbookForm">
+        <input type="text" name="guestName" placeholder="Tên bạn" required>
+        <textarea name="message" rows="4" placeholder="Nhập lời chúc của bạn..." required></textarea>
+        <button type="submit" class="submit-btn">Gửi lời chúc</button>
+    </form>
+</section>
+
+<!-- RSVP Form -->
+<section class="rsvp" id="rsvp">
+    <h2 class="section-title">Xác Nhận Tham Dự</h2>
+    <p class="section-subtitle">Xin vui lòng thông báo cho chúng tôi biết bạn sẽ đến tham dự</p>
+
+    <div class="rsvp-hearts">
+        <div class="rsvp-heart">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12,21.35L10.55,20.03C5.4,15.36 2,12.27 2,8.5C2,5.41 4.42,3 7.5,3C9.24,3 10.91,3.81 12,5.08C13.09,3.81 14.76,3 16.5,3C19.58,3 22,5.41 22,8.5C22,12.27 18.6,15.36 13.45,20.03L12,21.35Z"/>
+            </svg>
+            <p>Tôi sẽ tham dự</p>
+        </div>
+        <div class="rsvp-heart inactive">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12,21.35L10.55,20.03C5.4,15.36 2,12.27 2,8.5C2,5.41 4.42,3 7.5,3C9.24,3 10.91,3.81 12,5.08C13.09,3.81 14.76,3 16.5,3C19.58,3 22,5.41 22,8.5C22,12.27 18.6,15.36 13.45,20.03L12,21.35Z"/>
+            </svg>
+            <p>Xin lỗi, tôi không thể đến</p>
+        </div>
+    </div>
+
+    <form class="rsvp-form" id="rsvpForm">
+        <div class="form-group">
+            <input type="text" name="name" placeholder="Họ và tên" required>
+        </div>
+
+        <div class="form-group">
+            <input type="tel" name="phone" placeholder="Số điện thoại" required>
+        </div>
+
+        <div class="form-group">
+            <select name="attendance" required>
+                <option value="">Bạn sẽ tham dự buổi tiệc nào?</option>
+                <option value="both">Cả hai buổi</option>
+                <option value="lunch">Chỉ buổi trưa</option>
+                <option value="dinner">Chỉ buổi tối</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <input type="number" name="guests" min="1" placeholder="Số người tham dự" required>
+        </div>
+
+        <div class="form-group">
+            <textarea name="wishes" rows="3" placeholder="Lời chúc của bạn"></textarea>
+        </div>
+
+        <button type="submit" class="submit-btn">Xác nhận</button>
+    </form>
+</section>
+
+<!-- Gift Section -->
+<section class="gift" id="gift">
+    <h2 class="section-title">Mừng Cưới</h2>
+    <p class="section-subtitle">Thật vui mừng được chúng với bạn đến với hành trình yêu thương của chúng tôi. Sự hiện diện của bạn là quà tặng quan trọng nhất. Nếu bạn vẫn muốn gửi một món quà, chúng tôi xin trân trọng nhận để thêm ý nghĩa cho ngày trọng đại.</p>
+
+    <div class="gift-cards">
+        <div class="gift-card animate-on-scroll">
+            <div class="gift-avatar">
+                <img src="images/groom-avatar.jpg" alt="Chú rể">
+            </div>
+            <h3>Chú Rể</h3>
+            <p class="gift-name">Hoàng Hiệp</p>
+            <div class="bank-info">
+                <div class="qr-code">
+                    <img src="images/qr-groom.png" alt="QR Code">
+                </div>
+                <p class="bank-name">Vietcombank</p>
+                <p class="bank-account">0123456789</p>
+                <button class="copy-btn" data-account="0123456789">Copy STK</button>
+            </div>
+        </div>
+
+        <div class="gift-card animate-on-scroll">
+            <div class="gift-avatar">
+                <img src="images/bride-avatar.jpg" alt="Cô dâu">
+            </div>
+            <h3>Cô Dâu</h3>
+            <p class="gift-name">Kazua</p>
+            <div class="bank-info">
+                <div class="qr-code">
+                    <img src="images/qr-bride.png" alt="QR Code">
+                </div>
+                <p class="bank-name">Vietcombank</p>
+                <p class="bank-account">9876543210</p>
+                <button class="copy-btn" data-account="9876543210">Copy STK</button>
+            </div>
+        </div>
+    </div>
+
+    <p class="gift-note">** Điểm tâm 57% của Google hoặc bấm vào QR để tải</p>
+</section>
+
+<!-- Thank You -->
+<section class="thankyou" id="thankyou">
+    <div class="thankyou-content">
+        <div class="thankyou-image animate-on-scroll">
+            <img src="images/thankyou.jpg" alt="Thank you">
+        </div>
+        <h2 class="thankyou-title">Thank you!</h2>
+        <p class="thankyou-text">Hạnh phúc khi có bạn bên cạnh trong ngày vui của chúng tôi!</p>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+    <p>Happy Wedding Hoàng Hiệp & Kazua • 21.11.2025</p>
 </footer>
 
 <script src="script.js"></script>

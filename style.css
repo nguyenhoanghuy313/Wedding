@@ -1,122 +1,1015 @@
-@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Open+Sans:wght@400;600&display=swap');
+/* ===== CSS VARIABLES (Dễ dàng thay đổi màu sắc) ===== */
+:root {
+    /* Main Colors */
+    --primary-color: #9d7b6f;
+    --secondary-color: #c5a998;
+    --accent-color: #8b6f5f;
+    --light-bg: #f9f5f2;
+    --white: #ffffff;
+    --text-dark: #4a4a4a;
+    --text-light: #6b6b6b;
+
+    /* Gradients */
+    --gradient-overlay: linear-gradient(135deg, rgba(157, 123, 111, 0.8), rgba(197, 169, 152, 0.6));
+
+    /* Fonts */
+    --font-primary: 'Great Vibes', cursive;
+    --font-secondary: 'Playfair Display', serif;
+    --font-body: 'Montserrat', sans-serif;
+
+    /* Spacing */
+    --section-padding: 80px 20px;
+}
+
+/* ===== GOOGLE FONTS ===== */
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@400;600;700&family=Montserrat:wght@300;400;500;600&display=swap');
+
+/* ===== RESET & BASE ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
 
 body {
-    margin: 0;
-    font-family: 'Open Sans', sans-serif;
-    background-color: #f9f8f6;
-    color: #333;
+    font-family: var(--font-body);
+    color: var(--text-dark);
+    background: var(--light-bg);
     overflow-x: hidden;
-}
-
-/* Hero section */
-.hero {
-    position: relative;
-    height: 100vh;
-    background: linear-gradient(to bottom right, #cce3f0, #f9f6ef);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-}
-
-.hero .content h1 {
-    font-family: 'Great Vibes', cursive;
-    font-size: 3rem;
-    color: #325d79;
-    margin-bottom: 0.5rem;
-}
-
-.hero .content p {
-    font-size: 1.1rem;
-    color: #5a5a5a;
-}
-
-.date {
-    display: block;
-    margin-top: 1rem;
-    font-size: 1.2rem;
-    letter-spacing: 3px;
-    color: #6b8ea5;
-}
-
-section {
-    padding: 60px 20px;
-    text-align: center;
-}
-
-h2 {
-    color: #325d79;
-    font-family: 'Great Vibes', cursive;
-    font-size: 2rem;
-    margin-bottom: 20px;
-}
-
-p {
-    max-width: 600px;
-    margin: 0 auto 15px auto;
     line-height: 1.6;
 }
 
-/* Info card */
-.info-card {
-    background: #fff;
-    border-radius: 12px;
-    padding: 20px;
-    max-width: 400px;
-    margin: 0 auto;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
 }
 
-/* Gallery */
-.gallery .photos {
+section {
+    padding: var(--section-padding);
+    position: relative;
+}
+
+/* ===== MUSIC TOGGLE BUTTON ===== */
+.music-toggle {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: var(--primary-color);
+    border: none;
+    cursor: pointer;
+    z-index: 1000;
     display: flex;
-    gap: 10px;
+    align-items: center;
     justify-content: center;
-    flex-wrap: wrap;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    transition: all 0.3s ease;
 }
 
-.photo {
+.music-toggle:hover {
+    transform: scale(1.1);
+    background: var(--accent-color);
+}
+
+.music-toggle.playing {
+    animation: pulse 2s infinite;
+}
+
+.music-icon {
+    width: 24px;
+    height: 24px;
+    stroke: white;
+    stroke-width: 2;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+/* ===== FLOATING HEARTS ANIMATION ===== */
+.hearts-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+    overflow: hidden;
+}
+
+.floating-heart {
+    position: absolute;
+    bottom: -50px;
+    font-size: 20px;
+    color: var(--primary-color);
+    opacity: 0.6;
+    animation: floatHeart 8s linear;
+}
+
+@keyframes floatHeart {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0.6;
+    }
+    100% {
+        transform: translateY(-100vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+/* ===== HERO SECTION ===== */
+.hero {
+    position: relative;
+    height: 100vh;
+    background: url('images/hero-bg.jpg') center/cover no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: var(--white);
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--gradient-overlay);
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    animation: fadeInUp 1.5s ease;
+}
+
+.save-the-date {
+    font-family: var(--font-secondary);
+    font-size: 16px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    opacity: 0.9;
+}
+
+.couple-names {
+    font-family: var(--font-primary);
+    font-size: 60px;
+    font-weight: 400;
+    margin: 20px 0;
+    line-height: 1.2;
+}
+
+.bride-name, .groom-name {
+    display: block;
+}
+
+.ampersand {
+    font-size: 40px;
+    margin: 10px 0;
+    display: block;
+}
+
+.invitation-text {
+    font-size: 16px;
+    margin: 20px 0;
+    opacity: 0.9;
+}
+
+.wedding-date {
+    font-family: var(--font-secondary);
+    font-size: 24px;
+    letter-spacing: 5px;
+    margin-top: 30px;
+}
+
+/* Scroll Indicator */
+.scroll-indicator {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    animation: bounce 2s infinite;
+}
+
+.mouse {
+    width: 25px;
+    height: 40px;
+    border: 2px solid var(--white);
+    border-radius: 15px;
+    position: relative;
+}
+
+.mouse::before {
+    content: '';
+    width: 4px;
+    height: 8px;
+    background: var(--white);
+    position: absolute;
+    top: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 2px;
+    animation: scroll 1.5s infinite;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(-10px); }
+}
+
+@keyframes scroll {
+    0% { opacity: 1; top: 8px; }
+    100% { opacity: 0; top: 20px; }
+}
+
+/* ===== COMMON SECTION STYLES ===== */
+.section-title {
+    font-family: var(--font-secondary);
+    font-size: 36px;
+    text-align: center;
+    color: var(--primary-color);
+    margin-bottom: 15px;
+    position: relative;
+}
+
+.section-subtitle {
+    text-align: center;
+    font-size: 16px;
+    color: var(--text-light);
+    margin-bottom: 50px;
+}
+
+.section-decoration {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.decoration-img {
+    width: 80px;
+    opacity: 0.6;
+    margin: 0 auto;
+}
+
+/* ===== COUPLE INTRODUCTION ===== */
+.couple-intro {
+    background: var(--white);
+    text-align: center;
+}
+
+.couple-cards {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+    margin: 50px 0;
+}
+
+.couple-card {
+    width: 280px;
+    text-align: center;
+}
+
+.card-image {
+    width: 280px;
+    height: 350px;
+    border-radius: 20px 20px 180px 180px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    margin-bottom: 20px;
+}
+
+.couple-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.couple-card-name {
+    font-family: var(--font-primary);
+    font-size: 36px;
+    color: var(--primary-color);
+}
+
+.heart-divider {
+    text-align: center;
+    margin: 40px 0;
+}
+
+.hearts-svg {
     width: 200px;
-    height: 260px;
-    background-color: #eaeaea;
-    background-size: cover;
-    background-position: center;
+    height: 50px;
+}
+
+/* ===== COUNTDOWN SECTION ===== */
+.countdown-section {
+    background: var(--primary-color);
+    color: var(--white);
+    text-align: center;
+}
+
+.countdown-header {
+    margin-bottom: 40px;
+}
+
+.countdown-label {
+    font-size: 14px;
+    letter-spacing: 2px;
+    opacity: 0.9;
+}
+
+.countdown-title {
+    font-family: var(--font-secondary);
+    font-size: 42px;
+    margin: 15px 0;
+}
+
+.heart-icon svg {
+    width: 30px;
+    height: 30px;
+    margin: 20px auto;
+}
+
+.countdown-timer {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin: 40px 0;
+}
+
+.time-unit {
+    text-align: center;
+}
+
+.time-circle {
+    width: 90px;
+    height: 90px;
+    border: 3px solid rgba(255,255,255,0.5);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+.time-number {
+    font-size: 32px;
+    font-weight: 600;
+    font-family: var(--font-secondary);
+}
+
+.time-label {
+    font-size: 14px;
+    opacity: 0.9;
+}
+
+/* Event Info */
+.event-info {
+    background: rgba(255,255,255,0.1);
+    border-radius: 20px;
+    padding: 40px;
+    margin-top: 50px;
+    backdrop-filter: blur(10px);
+}
+
+.event-title {
+    font-family: var(--font-secondary);
+    font-size: 28px;
+    margin: 10px 0;
+}
+
+.event-subtitle {
+    font-style: italic;
+    opacity: 0.9;
+}
+
+.event-text {
+    margin: 10px 0;
+}
+
+.event-couple {
+    font-family: var(--font-primary);
+    font-size: 28px;
+    margin: 20px 0;
+}
+
+.event-details {
+    margin-top: 30px;
+}
+
+.event-image {
+    width: 100%;
+    max-width: 400px;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 15px;
+    margin: 0 auto 30px;
+}
+
+.event-info-box {
+    background: rgba(255,255,255,0.95);
+    color: var(--text-dark);
+    padding: 30px;
+    border-radius: 15px;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.event-type {
+    color: var(--primary-color);
+    font-size: 18px;
+    letter-spacing: 2px;
+}
+
+.event-names {
+    font-family: var(--font-secondary);
+    font-size: 22px;
+    margin: 10px 0;
+    color: var(--primary-color);
+}
+
+.event-location {
+    font-weight: 500;
+    margin: 10px 0;
+}
+
+.event-time {
+    margin: 10px 0;
+}
+
+.event-date-large {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    margin: 25px 0;
+    padding: 20px;
+    background: var(--light-bg);
     border-radius: 10px;
 }
 
-/* Thanks section */
-.thanks {
-    background-color: #e7eff3;
-    padding: 60px 20px;
+.date-day {
+    font-size: 14px;
+    color: var(--primary-color);
 }
 
-/* Footer */
-footer {
-    background-color: #325d79;
-    color: #fff;
+.date-number {
+    font-size: 48px;
+    font-weight: 700;
+    color: var(--primary-color);
+    font-family: var(--font-secondary);
+}
+
+.date-month {
+    font-size: 14px;
+    color: var(--primary-color);
+}
+
+.event-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 25px;
+}
+
+.event-btn {
+    width: 50px;
+    height: 50px;
+    border-radius: 10px;
+    background: var(--primary-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.event-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.event-btn svg {
+    width: 24px;
+    height: 24px;
+    fill: white;
+}
+
+/* ===== LOVE STORY ===== */
+.love-story {
+    background: var(--white);
+}
+
+.story-timeline {
+    max-width: 900px;
+    margin: 50px auto;
+    position: relative;
+}
+
+.story-timeline::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: var(--secondary-color);
+    transform: translateX(-50%);
+}
+
+.story-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 60px;
+    gap: 30px;
+}
+
+.story-item.left {
+    flex-direction: row;
+}
+
+.story-item.right {
+    flex-direction: row-reverse;
+}
+
+.story-image {
+    flex: 1;
+    max-width: 350px;
+}
+
+.story-image img {
+    width: 100%;
+    height: 280px;
+    object-fit: cover;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+}
+
+.story-content {
+    flex: 1;
+    padding: 20px;
+}
+
+.story-text {
+    font-size: 16px;
+    line-height: 1.8;
+    color: var(--text-dark);
+    font-style: italic;
+}
+
+/* ===== PHOTO GALLERY ===== */
+.gallery {
+    background: var(--light-bg);
+}
+
+.gallery-container {
+    position: relative;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.gallery-wrapper {
+    overflow: hidden;
+    border-radius: 15px;
+}
+
+.gallery-track {
+    display: flex;
+    transition: transform 0.5s ease;
+}
+
+.gallery-slide {
+    min-width: 100%;
+    padding: 0 10px;
+}
+
+.gallery-slide img {
+    width: 100%;
+    height: 500px;
+    object-fit: cover;
+    border-radius: 15px;
+}
+
+.gallery-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: var(--primary-color);
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    z-index: 10;
+}
+
+.gallery-nav:hover {
+    background: var(--accent-color);
+    transform: translateY(-50%) scale(1.1);
+}
+
+.gallery-nav.prev {
+    left: 10px;
+}
+
+.gallery-nav.next {
+    right: 10px;
+}
+
+.gallery-nav svg {
+    width: 24px;
+    height: 24px;
+    fill: white;
+}
+
+/* ===== GUESTBOOK & RSVP FORMS ===== */
+.guestbook, .rsvp {
+    background: var(--white);
+}
+
+.guestbook-form, .rsvp-form {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+input[type="text"],
+input[type="tel"],
+input[type="number"],
+select,
+textarea {
+    width: 100%;
+    padding: 15px;
+    border: 2px solid #e0e0e0;
+    border-radius: 10px;
+    font-family: var(--font-body);
+    font-size: 15px;
+    transition: all 0.3s ease;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+}
+
+textarea {
+    resize: vertical;
+}
+
+.submit-btn {
+    width: 100%;
+    padding: 15px;
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.submit-btn:hover {
+    background: var(--accent-color);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+/* RSVP Hearts */
+.rsvp-hearts {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin: 40px 0;
+    flex-wrap: wrap;
+}
+
+.rsvp-heart {
     text-align: center;
-    padding: 10px 0;
-    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
 }
 
-/* Fade-in animation */
-.fade-in {
+.rsvp-heart svg {
+    width: 60px;
+    height: 60px;
+    fill: var(--primary-color);
+    margin-bottom: 10px;
+}
+
+.rsvp-heart.inactive {
+    opacity: 0.3;
+}
+
+.rsvp-heart:hover {
+    transform: scale(1.1);
+}
+
+.rsvp-heart p {
+    font-size: 14px;
+    color: var(--text-dark);
+}
+
+/* ===== GIFT SECTION ===== */
+.gift {
+    background: var(--light-bg);
+}
+
+.gift-cards {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+    margin: 50px 0;
+}
+
+.gift-card {
+    background: var(--white);
+    border-radius: 20px;
+    padding: 30px;
+    width: 300px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.gift-avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin: 0 auto 20px;
+    border: 4px solid var(--primary-color);
+}
+
+.gift-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.gift-card h3 {
+    color: var(--primary-color);
+    margin-bottom: 5px;
+}
+
+.gift-name {
+    font-family: var(--font-primary);
+    font-size: 24px;
+    color: var(--text-dark);
+    margin-bottom: 20px;
+}
+
+.bank-info {
+    margin-top: 20px;
+}
+
+.qr-code {
+    width: 150px;
+    height: 150px;
+    margin: 0 auto 15px;
+    border: 2px solid #e0e0e0;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.qr-code img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.bank-name {
+    font-weight: 600;
+    color: var(--primary-color);
+    margin: 10px 0;
+}
+
+.bank-account {
+    font-size: 18px;
+    font-weight: 600;
+    margin: 10px 0;
+}
+
+.copy-btn {
+    padding: 10px 25px;
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+.copy-btn:hover {
+    background: var(--accent-color);
+}
+
+.gift-note {
+    text-align: center;
+    font-size: 14px;
+    color: var(--text-light);
+    font-style: italic;
+    margin-top: 30px;
+}
+
+/* ===== THANK YOU ===== */
+.thankyou {
+    background: var(--white);
+    text-align: center;
+}
+
+.thankyou-content {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.thankyou-image {
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin: 0 auto 30px;
+    border: 5px solid var(--primary-color);
+}
+
+.thankyou-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.thankyou-title {
+    font-family: var(--font-primary);
+    font-size: 60px;
+    color: var(--primary-color);
+    margin: 20px 0;
+}
+
+.thankyou-text {
+    font-size: 18px;
+    color: var(--text-dark);
+}
+
+/* ===== FOOTER ===== */
+.footer {
+    background: var(--primary-color);
+    color: white;
+    text-align: center;
+    padding: 30px 20px;
+}
+
+.footer p {
+    font-size: 14px;
+    opacity: 0.9;
+}
+
+/* ===== ANIMATIONS ===== */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-on-scroll {
     opacity: 0;
     transform: translateY(30px);
-    transition: all 1s ease;
+    transition: all 0.8s ease;
 }
-.fade-in.visible {
+
+.animate-on-scroll.visible {
     opacity: 1;
     transform: translateY(0);
 }
 
-/* Responsive */
+/* ===== RESPONSIVE ===== */
 @media (max-width: 768px) {
-    .hero .content h1 {
-        font-size: 2.5rem;
+    :root {
+        --section-padding: 50px 15px;
     }
-    .photo {
-        width: 140px;
-        height: 180px;
+
+    .couple-names {
+        font-size: 40px;
+    }
+
+    .section-title {
+        font-size: 28px;
+    }
+
+    .couple-cards {
+        gap: 30px;
+    }
+
+    .card-image {
+        width: 250px;
+        height: 320px;
+    }
+
+    .couple-card {
+        width: 250px;
+    }
+
+    .story-timeline::before {
+        left: 20px;
+    }
+
+    .story-item.left,
+    .story-item.right {
+        flex-direction: column;
+        padding-left: 50px;
+    }
+
+    .story-image {
+        max-width: 100%;
+    }
+
+    .gallery-slide img {
+        height: 350px;
+    }
+
+    .gift-cards {
+        gap: 30px;
+    }
+
+    .thankyou-title {
+        font-size: 40px;
+    }
+
+    .event-info {
+        padding: 30px 20px;
+    }
+
+    .countdown-timer {
+        gap: 15px;
+    }
+
+    .time-circle {
+        width: 70px;
+        height: 70px;
+    }
+
+    .time-number {
+        font-size: 24px;
+    }
+}
+
+@media (max-width: 480px) {
+    .couple-names {
+        font-size: 32px;
+    }
+
+    .ampersand {
+        font-size: 30px;
+    }
+
+    .wedding-date {
+        font-size: 18px;
+    }
+
+    .card-image {
+        width: 220px;
+        height: 280px;
+    }
+
+    .couple-card {
+        width: 220px;
+    }
+
+    .time-circle {
+        width: 60px;
+        height: 60px;
+    }
+
+    .time-number {
+        font-size: 20px;
+    }
+
+    .gallery-slide img {
+        height: 250px;
     }
 }
