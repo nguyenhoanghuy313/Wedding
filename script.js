@@ -3,7 +3,7 @@
 // ===== CONFIGURATION =====
 const CONFIG = {
     weddingDate: new Date('2025-11-21T11:00:00'), // Ngày giờ đám cưới
-    googleSheetURL: 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE', // Thay bằng URL Google Apps Script
+    googleSheetURL: 'https://script.google.com/macros/s/AKfycbyGH6GQdcMPTtXhYucSKy1K0ZGIN94N8WFuO1_TDJ_mboNvUQToxciu-s8iftv68rc/exec', // Thay bằng URL Google Apps Script
     galleryAutoPlay: false, // Auto play gallery
     galleryInterval: 3000, // 3 seconds
     heartsInterval: 2000 // Tạo trái tim mỗi 2 giây
