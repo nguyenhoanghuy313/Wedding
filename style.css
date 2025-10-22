@@ -1,28 +1,31 @@
 /* ===== CSS VARIABLES (Dễ dàng thay đổi màu sắc) ===== */
+
+/* ===== GOOGLE FONTS ===== */
+@import url('https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap');
+
+
 :root {
     /* Main Colors */
-    --primary-color: #7f1927;
-    --secondary-color: #6eb5c9;
-    --accent-color: #5eccd4;
-    --light-bg: #e8f4f7;
-    --white: #f0fafb;
-    --text-dark: #2c5f6f;
-    --text-light: #7ba5b0;
+    --primary-color: #7f1927;   /* Đỏ rượu vang – điểm nhấn chính, mạnh mẽ, sang trọng */
+    --secondary-color: #c38d9e; /* Hồng tro – tông phụ mềm mại, cân bằng cho đỏ chính */
+    --accent-color: #f2c94c;    /* Vàng ấm – điểm sáng nhấn vào CTA hoặc icon */
+    --light-bg: #f9f4f5;        /* Nền sáng hơi hồng, giữ cảm giác ấm áp */
+    --white: #ffffff;           /* Trắng tinh khiết cho nội dung chính */
+    --text-dark: #2e2e2e;       /* Xám đậm, dễ đọc trên nền sáng */
+    --text-light: #8c8c8c;      /* Xám nhạt cho phần mô tả hoặc text phụ */
 
     /* Gradients */
     --gradient-overlay: linear-gradient(135deg, rgba(74, 159, 181, 0.8), rgba(110, 181, 201, 0.8));
 
     /* Fonts */
-    --font-primary: 'Great Vibes', cursive;
+    --font-primary: 'Lora', serif;
     --font-secondary: 'Playfair Display', serif;
-    --font-body: 'Montserrat', sans-serif;
+    --font-body: 'Be Vietnam Pro', sans-serif;
 
     /* Spacing */
     --section-padding: 80px 20px;
 }
 
-/* ===== GOOGLE FONTS ===== */
-@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@400;600;700&family=Montserrat:wght@300;400;500;600&display=swap');
 
 /* ===== RESET & BASE ===== */
 * {
@@ -168,6 +171,7 @@ section {
     justify-content: center;
     text-align: center;
     color: var(--white);
+    background-position: center top 12%; /* focus phần trên của ảnh */
 }
 
 .hero-overlay {
@@ -176,10 +180,15 @@ section {
     left: 0;
     width: 100%;
     height: 100%;
-    background: var(--gradient-overlay);
+    /*background: var(--gradient-overlay);*/
 }
 
 .hero-content {
+    color: #ffe4b8; /* sáng hơn vàng kem một chút */
+    text-shadow:
+            0 0 6px rgba(127, 25, 39, 0.7),   /* viền đỏ rượu vang mờ để nổi trên váy trắng */
+            0 0 2px rgba(0, 0, 0, 0.4);       /* bóng nhẹ để rõ trên nền sáng */
+
     position: relative;
     z-index: 2;
     animation: fadeInUp 1.5s ease;
@@ -282,16 +291,6 @@ section {
     margin-bottom: 50px;
 }
 
-.section-decoration {
-    text-align: center;
-    margin-bottom: 30px;
-}
-
-.decoration-img {
-    width: 80px;
-    opacity: 0.6;
-    margin: 0 auto;
-}
 
 /* ===== COUPLE INTRODUCTION ===== */
 .couple-intro {
@@ -443,7 +442,7 @@ section {
 .event-image {
     width: 100%;
     max-width: 400px;
-    height: 300px;
+    height: 600px;
     object-fit: cover;
     border-radius: 15px;
     margin: 0 auto 30px;
@@ -614,6 +613,7 @@ section {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: center;
     transition: transform 0.3s ease;
 }
 
@@ -650,8 +650,9 @@ section {
 
 .gallery-container {
     position: relative;
-    max-width: 1200px;
+    max-width: 1000px;
     margin: 0 auto;
+
 }
 
 .gallery-wrapper {
@@ -674,6 +675,7 @@ section {
     height: 500px;
     object-fit: cover;
     border-radius: 15px;
+    background: var(--light-bg);
 }
 
 .gallery-nav {
@@ -1079,7 +1081,7 @@ textarea {
     }
 
     .thankyou-title {
-        font-size: 40px;
+        font-size: 32px;
     }
 
     .event-info {
