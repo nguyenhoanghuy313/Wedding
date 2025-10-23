@@ -222,7 +222,7 @@ section {
 }
 
 .invitation-text {
-    font-size: 16px;
+    font-size: 20px;
     margin: 20px 0;
     opacity: 0.9;
 }
@@ -953,6 +953,7 @@ textarea {
     font-size: 60px;
     color: var(--primary-color);
     margin: 20px 0;
+    white-space: nowrap;
 }
 
 .thankyou-text {
@@ -1112,7 +1113,7 @@ textarea {
     }
 
     .wedding-date {
-        font-size: 18px;
+        font-size: 20px;
     }
 
     .card-image {

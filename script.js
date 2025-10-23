@@ -67,9 +67,9 @@ const translations = {
         'hours': '時間',
         'minutes': '分',
         'seconds': '秒',
-        'event-title': 'ご列席をお待ちしております',
-        'event-subtitle': 'ご家族ご友人の皆様',
-        'event-text': 'ご結婚式にご列席ください',
+        'event-title': 'ご参加お待ちしております',
+        'event-subtitle': '',
+        'event-text': '',
         'event-type': 'ご結婚式',
         'event-time': '開式時刻:',
         'date-day': '金曜日',
@@ -129,8 +129,17 @@ function updateLanguage() {
     // Update text content
     document.querySelectorAll('[data-translate]').forEach(el => {
         const key = el.dataset.translate;
-        if (translations[currentLanguage][key]) {
-            el.textContent = translations[currentLanguage][key];
+
+        // Kiểm tra xem có text hay không
+        if (translations[currentLanguage][key] !== undefined) {
+            if (translations[currentLanguage][key] === '') {
+                // Nếu text rỗng → ẩn element
+                el.style.display = 'none';
+            } else {
+                // Nếu có text → hiện element và update text
+                el.style.display = '';
+                el.textContent = translations[currentLanguage][key];
+            }
         }
     });
 
