@@ -54,7 +54,11 @@ const translations = {
         'rsvp-error': 'Có lỗi xảy ra. Vui lòng thử lại.',
         'rsvp-validation': 'Vui lòng điền đầy đủ thông tin (Họ tên, Số điện thoại và Số người)!',
         'guestbook-success': 'Cảm ơn lời chúc của bạn!',
-        'copy-success': 'Đã copy!'
+        'copy-success': 'Đã copy!',
+        'location-parking': 'Nơi để xe',
+        'location-parking-note': 'Bãi đỗ xe miễn phí',
+        'location-venue': 'Nơi diễn ra tiệc cưới',
+        'location-venue-note': 'Trung tâm tiệc cưới Thu Hằng',
     },
     ja: {
         'save-the-date': 'Save The Date',
@@ -108,7 +112,11 @@ const translations = {
         'rsvp-error': 'エラーが発生しました。もう一度お試しください。',
         'rsvp-validation': '必要な情報をすべてご入力ください（お名前、電話番号、ゲスト数）',
         'guestbook-success': 'メッセージをありがとうございます！',
-        'copy-success': 'コピーしました'
+        'copy-success': 'コピーしました',
+        'location-parking': '駐車場',
+        'location-parking-note': '無料駐車場',
+        'location-venue': '結婚式会場',
+        'location-venue-note': 'Thu Hằng ウェディングセンター',
     }
 };
 
@@ -238,31 +246,115 @@ setInterval(updateCountdown, 1000);
 
 // ===== PHOTO GALLERY SLIDER =====
 const galleryTrack = document.getElementById('galleryTrack');
+const galleryWrapper = document.querySelector('.gallery-wrapper');
 const prevBtn = document.getElementById('prevBtn');
 const nextBtn = document.getElementById('nextBtn');
 let currentSlide = 0;
 const slides = document.querySelectorAll('.gallery-slide');
 const totalSlides = slides.length;
 
+// Touch/Swipe variables
+let touchStartX = 0;
+let touchEndX = 0;
+let touchStartY = 0;
+let touchEndY = 0;
+
 function updateGallery() {
     const offset = -currentSlide * 100;
     galleryTrack.style.transform = `translateX(${offset}%)`;
 }
 
-prevBtn.addEventListener('click', () => {
-    currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
-    updateGallery();
-});
-
-nextBtn.addEventListener('click', () => {
+function nextSlide() {
     currentSlide = (currentSlide + 1) % totalSlides;
     updateGallery();
+}
+
+function prevSlide() {
+    currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+    updateGallery();
+}
+
+// Button controls
+prevBtn.addEventListener('click', prevSlide);
+nextBtn.addEventListener('click', nextSlide);
+
+// Touch/Swipe controls
+galleryWrapper.addEventListener('touchstart', (e) => {
+    touchStartX = e.changedTouches[0].screenX;
+    touchStartY = e.changedTouches[0].screenY;
+}, { passive: true });
+
+galleryWrapper.addEventListener('touchend', (e) => {
+    touchEndX = e.changedTouches[0].screenX;
+    touchEndY = e.changedTouches[0].screenY;
+    handleSwipe();
+}, { passive: true });
+
+// Mouse drag controls (for desktop)
+let mouseDown = false;
+let startX = 0;
+
+galleryWrapper.addEventListener('mousedown', (e) => {
+    mouseDown = true;
+    startX = e.pageX;
+    galleryWrapper.style.cursor = 'grabbing';
+});
+
+galleryWrapper.addEventListener('mousemove', (e) => {
+    if (!mouseDown) return;
+    e.preventDefault();
+});
+
+galleryWrapper.addEventListener('mouseup', (e) => {
+    if (!mouseDown) return;
+    mouseDown = false;
+    galleryWrapper.style.cursor = 'grab';
+
+    const endX = e.pageX;
+    const diff = startX - endX;
+
+    if (Math.abs(diff) > 50) {
+        if (diff > 0) {
+            nextSlide();
+        } else {
+            prevSlide();
+        }
+    }
+});
+
+galleryWrapper.addEventListener('mouseleave', () => {
+    mouseDown = false;
+    galleryWrapper.style.cursor = 'grab';
+});
+
+function handleSwipe() {
+    const diffX = touchStartX - touchEndX;
+    const diffY = Math.abs(touchStartY - touchEndY);
+
+    // Chỉ swipe ngang nếu movement ngang > dọc (tránh conflict với scroll)
+    if (Math.abs(diffX) > 50 && Math.abs(diffX) > diffY) {
+        if (diffX > 0) {
+            // Swipe left - next slide
+            nextSlide();
+        } else {
+            // Swipe right - prev slide
+            prevSlide();
+        }
+    }
+}
+
+// Keyboard controls
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowLeft') {
+        prevSlide();
+    } else if (e.key === 'ArrowRight') {
+        nextSlide();
+    }
 });
 
 if (CONFIG.galleryAutoPlay) {
     setInterval(() => {
-        currentSlide = (currentSlide + 1) % totalSlides;
-        updateGallery();
+        nextSlide();
     }, CONFIG.galleryInterval);
 }
 
